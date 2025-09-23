@@ -52,17 +52,22 @@ export default function HomePage() {
                     </Link>
 
                     {/* 🍎 Fruits */}
-                    <div className="relative group overflow-hidden rounded-lg shadow-md">
-                        <img
-                            src="/images/fr.jpg"
-                            alt="Fruits"
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-green-800/30 flex items-end p-4">
-                            <h3 className="text-white text-lg font-semibold">Fruits</h3>
+                    <Link href="/fruits-options">
+                        <div className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer">
+                            <img
+                                src="/images/veg.jpg"
+                                alt="Vegetables"
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-green-900/40 flex flex-col justify-end p-4 text-white">
+                                <h3 className="text-lg font-semibold mb-2">Fruits</h3>
+                                <p className="text-sm leading-snug">
+                                    High-quality fruits directly from farms.
+                                </p>
+                                <span className="mt-2 text-xs font-medium">50 PRODUCTS</span>
+                            </div>
                         </div>
-                    </div>
-
+                    </Link>
                 </div>
             </section>
 
