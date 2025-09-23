@@ -1,28 +1,94 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+
+const navLinks = [
+  { label: "HOME", href: "/" },
+  { label: "PRODUCTS", href: "#products" },
+  { label: "ABOUT US", href: "#about" },
+];
+
+const userActions = [
+  { label: "Login", onClick: () => alert("Login clicked") },
+  { label: "Register", onClick: () => alert("Register clicked") },
+  { label: "🛒 (1)", onClick: () => alert("Cart clicked") },
+];
 
 export default function Navbar() {
-    return (
-        <nav className="flex justify-between items-center px-6 py-4 shadow-md bg-white">
-            <div className="w-10 h-auto">
-                <img src="/images/logo1.jpg" alt="AGROHUB Logo" className="w-full h-auto object-contain" />
-            </div>
-            <ul className="hidden lg:flex gap-6 text-sm font-medium text-green-800">
-                <li>
-                    <Link href="/" className="hover:text-green-600 cursor-pointer">HOME</Link>
-                </li>
-                <li>
-                    <a href="#products" className="hover:text-green-600 cursor-pointer">PRODUCTS</a>
-                </li>
-                <li>
-                    <a href="#about" className="hover:text-green-600 cursor-pointer">ABOUT US</a>
-                </li>
-            </ul>
+  const [isOpen, setIsOpen] = useState(false);
 
-            <div className="flex gap-4 text-sm text-green-800">
-                <span className="cursor-pointer">Login</span>
-                <span className="cursor-pointer">Register</span>
-                <span className="cursor-pointer">🛒 (1)</span>
+  return (
+    <nav className="bg-white shadow-md px-6 py-4">
+      <div className="flex justify-between items-center">
+        {/* Logo */}
+        <div className="w-10 h-auto">
+          <img
+            src="/images/logo1.jpg"
+            alt="AGROHUB Logo"
+            className="w-full h-auto object-contain"
+          />
+        </div>
+
+        {/* Desktop Navigation */}
+        <ul className="hidden lg:flex gap-6 text-sm font-medium text-green-800">
+          {navLinks.map((link, idx) => (
+            <li key={idx}>
+              {link.href.startsWith("#") ? (
+                <a href={link.href} className="hover:text-green-600 cursor-pointer">
+                  {link.label}
+                </a>
+              ) : (
+                <Link href={link.href} className="hover:text-green-600 cursor-pointer">
+                  {link.label}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* User Actions */}
+        <div className="hidden lg:flex gap-4 text-sm text-green-800">
+          {userActions.map((action, idx) => (
+            <span key={idx} className="cursor-pointer" onClick={action.onClick}>
+              {action.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Hamburger Menu */}
+        <button
+          className="lg:hidden text-green-800 text-xl"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="mt-4 flex flex-col gap-4 text-sm font-medium text-green-800 lg:hidden">
+          {navLinks.map((link, idx) => (
+            <div key={idx}>
+              {link.href.startsWith("#") ? (
+                <a href={link.href} className="hover:text-green-600 cursor-pointer">
+                  {link.label}
+                </a>
+              ) : (
+                <Link href={link.href} className="hover:text-green-600 cursor-pointer">
+                  {link.label}
+                </Link>
+              )}
             </div>
-        </nav>
-    );
+          ))}
+          {userActions.map((action, idx) => (
+            <span key={idx} className="cursor-pointer" onClick={action.onClick}>
+              {action.label}
+            </span>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
 }
