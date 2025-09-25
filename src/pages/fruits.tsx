@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import AboutUs from "./AboutUs";
+import Footer from "./Footer";
 
 const fruitsData = [
   {
@@ -73,6 +75,8 @@ export default function FruitsPage() {
           ))}
         </div>
       </section>
+      <AboutUs/>
+      <Footer/>
     </main>
   );
 }

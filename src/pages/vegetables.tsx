@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import AboutUs from "./AboutUs";
+import Footer from "./Footer";
 
 const vegetablesData = [
   {
@@ -66,6 +68,8 @@ export default function VegetablesPage() {
           ))}
         </div>
       </section>
+      <AboutUs/>
+      <Footer/>
     </main>
   );
 }

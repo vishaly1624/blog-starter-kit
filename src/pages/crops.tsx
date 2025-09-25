@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import AboutUs from "./AboutUs";
+import Footer from "./Footer";
 
 const cropsData = [
   {
@@ -55,6 +57,8 @@ export default function CropsPage() {
           ))}
         </div>
       </section>
+      <AboutUs/>
+      <Footer/>
     </main>
   );
 }

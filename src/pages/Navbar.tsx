@@ -7,12 +7,12 @@ const navLinks = [
   { label: "HOME", href: "/" },
   { label: "PRODUCTS", href: "#products" },
   { label: "ABOUT US", href: "#about" },
+  { label: "CONTACT US", href: "#contact" }, // ✅ New Contact Us link
 ];
 
 const userActions = [
-  { label: "Login", onClick: () => alert("Login clicked") },
-  { label: "Register", onClick: () => alert("Register clicked") },
-  { label: "🛒 (1)", onClick: () => alert("Cart clicked") },
+  { label: "Login", onClick: () => (window.location.href = "/login") },
+  { label: "Cart", onClick: () => alert("Cart clicked") },
 ];
 
 export default function Navbar() {
@@ -35,11 +35,17 @@ export default function Navbar() {
           {navLinks.map((link, idx) => (
             <li key={idx}>
               {link.href.startsWith("#") ? (
-                <a href={link.href} className="hover:text-green-600 cursor-pointer">
+                <a
+                  href={link.href}
+                  className="hover:text-green-600 cursor-pointer"
+                >
                   {link.label}
                 </a>
               ) : (
-                <Link href={link.href} className="hover:text-green-600 cursor-pointer">
+                <Link
+                  href={link.href}
+                  className="hover:text-green-600 cursor-pointer"
+                >
                   {link.label}
                 </Link>
               )}
@@ -50,7 +56,11 @@ export default function Navbar() {
         {/* User Actions */}
         <div className="hidden lg:flex gap-4 text-sm text-green-800">
           {userActions.map((action, idx) => (
-            <span key={idx} className="cursor-pointer" onClick={action.onClick}>
+            <span
+              key={idx}
+              className="cursor-pointer"
+              onClick={action.onClick}
+            >
               {action.label}
             </span>
           ))}
@@ -72,18 +82,33 @@ export default function Navbar() {
           {navLinks.map((link, idx) => (
             <div key={idx}>
               {link.href.startsWith("#") ? (
-                <a href={link.href} className="hover:text-green-600 cursor-pointer">
+                <a
+                  href={link.href}
+                  className="hover:text-green-600 cursor-pointer"
+                  onClick={() => setIsOpen(false)} // ✅ close menu after click
+                >
                   {link.label}
                 </a>
               ) : (
-                <Link href={link.href} className="hover:text-green-600 cursor-pointer">
+                <Link
+                  href={link.href}
+                  className="hover:text-green-600 cursor-pointer"
+                  onClick={() => setIsOpen(false)} // ✅ close menu after click
+                >
                   {link.label}
                 </Link>
               )}
             </div>
           ))}
           {userActions.map((action, idx) => (
-            <span key={idx} className="cursor-pointer" onClick={action.onClick}>
+            <span
+              key={idx}
+              className="cursor-pointer"
+              onClick={() => {
+                action.onClick();
+                setIsOpen(false);
+              }}
+            >
               {action.label}
             </span>
           ))}
