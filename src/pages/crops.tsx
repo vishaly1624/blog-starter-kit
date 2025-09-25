@@ -4,35 +4,38 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
+import { useCart, CartItem } from "./CartContext";
 
-const cropsData = [
+const cropsData: CartItem[] = [
   {
     title: "Organic Wheat",
     description: "Rich in nutrients and grown without chemicals.",
     image: "/images/wheat.jpg",
-    price: "$30.00",
+    price: 30,
   },
   {
     title: "Basmati Rice",
     description: "Aromatic long-grain rice from northern farms.",
     image: "/images/rice.jpg",
-    price: "$25.00",
+    price: 30,
   },
   {
     title: "Maize",
     description: "Golden corn perfect for flour and feed.",
     image: "/images/maize.jpg",
-    price: "$18.00",
+    price: 30,
   },
   {
     title: "Barley",
     description: "Ideal for brewing and health foods.",
     image: "/images/barley.jpg",
-    price: "$22.00",
+    price: 30,
   },
 ];
 
 export default function CropsPage() {
+  const { addToCart } = useCart();
+
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
       <Navbar />
@@ -42,8 +45,9 @@ export default function CropsPage() {
         <h2 className="text-2xl font-bold text-center mb-8 text-green-900 tracking-wide">
           Our Crops Collection
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cropsData.map((crop, index) => (
+          {cropsData.map((crop: CartItem, index: number) => (
             <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden group">
               <img
                 src={crop.image}
@@ -54,17 +58,21 @@ export default function CropsPage() {
                 <h3 className="text-lg font-semibold">{crop.title}</h3>
                 <p className="text-sm text-gray-600 mt-1">{crop.description}</p>
                 <span className="block mt-2 text-green-700 font-bold">{crop.price}</span>
-                {/* Buttons */}
-                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+
+                <div className="mt-4 flex flex-col sm:flex-row gap-2 w-full">
                   <button
-                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
                     onClick={() => alert("Buy Now clicked")}
                   >
                     Buy Now
                   </button>
+
                   <button
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
-                    onClick={() => alert("Added to Cart")}
+                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
+                    onClick={() => {
+                      addToCart(crop); // Add to cart
+                      alert(`✅ ${crop.title} added to cart`); // Show alert with product name
+                    }}
                   >
                     Add to Cart
                   </button>
@@ -74,6 +82,7 @@ export default function CropsPage() {
           ))}
         </div>
       </section>
+
       <AboutUs />
       <Footer />
     </main>

@@ -4,47 +4,50 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
+import { useCart, CartItem } from "./CartContext";
 
-const fruitsData = [
+const fruitsData: CartItem[] = [
   {
     title: "Red Apples",
     description: "Crisp and sweet, packed with natural goodness.",
     image: "/images/apple.jpg",
-    price: "$15.00",
+    price: 15,
   },
   {
     title: "Bananas",
     description: "Rich in potassium, perfect for quick energy.",
     image: "/images/banana.jpg",
-    price: "$10.00",
+    price: 10,
   },
   {
     title: "Oranges",
     description: "Juicy and tangy, loaded with Vitamin C.",
     image: "/images/orange.jpg",
-    price: "$12.00",
+    price: 12,
   },
   {
     title: "Mangoes",
     description: "Sweet and tropical, the king of fruits.",
     image: "/images/mango.jpg",
-    price: "$20.00",
+    price: 20,
   },
   {
     title: "Grapes",
     description: "Fresh clusters, ideal for snacking or juices.",
     image: "/images/grapes.jpg",
-    price: "$14.00",
+    price: 14,
   },
   {
     title: "Strawberries",
     description: "Bright red and juicy, perfect for desserts.",
     image: "/images/strawberry.jpg",
-    price: "$18.00",
+    price: 18,
   },
 ];
 
 export default function FruitsPage() {
+  const { addToCart } = useCart();
+
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
       <Navbar />
@@ -54,7 +57,7 @@ export default function FruitsPage() {
           Our Fruit Collection
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {fruitsData.map((fruit, index) => (
+          {fruitsData.map((fruit: CartItem, index: number) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden group"
@@ -66,23 +69,22 @@ export default function FruitsPage() {
               />
               <div className="p-4">
                 <h3 className="text-lg font-semibold">{fruit.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  {fruit.description}
-                </p>
-                <span className="block mt-2 text-red-700 font-bold">
-                  {fruit.price}
-                </span>
-                {/* Buttons */}
-                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                <p className="text-sm text-gray-600 mt-1">{fruit.description}</p>
+                <span className="block mt-2 text-red-700 font-bold">${fruit.price}</span>
+
+                <div className="mt-4 flex flex-col sm:flex-row gap-2 w-full">
                   <button
-                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
                     onClick={() => alert("Buy Now clicked")}
                   >
                     Buy Now
                   </button>
                   <button
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
-                    onClick={() => alert("Added to Cart")}
+                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
+                    onClick={() => {
+                      addToCart(fruit); // Add to cart
+                      alert(`✅ ${fruit.title} added to cart`); // Show alert
+                    }}
                   >
                     Add to Cart
                   </button>
@@ -92,8 +94,8 @@ export default function FruitsPage() {
           ))}
         </div>
       </section>
-      <AboutUs/>
-      <Footer/>
+      <AboutUs />
+      <Footer />
     </main>
   );
 }

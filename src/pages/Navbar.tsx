@@ -12,7 +12,7 @@ const navLinks = [
 
 const userActions = [
   { label: "Login", onClick: () => (window.location.href = "/login") },
-  { label: "Cart", onClick: () => alert("Cart clicked") },
+   { label: "Cart", onClick: () => (window.location.href = "/cart") },
 ];
 
 export default function Navbar() {
