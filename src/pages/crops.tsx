@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import AboutUs from "./AboutUs";
@@ -52,13 +54,28 @@ export default function CropsPage() {
                 <h3 className="text-lg font-semibold">{crop.title}</h3>
                 <p className="text-sm text-gray-600 mt-1">{crop.description}</p>
                 <span className="block mt-2 text-green-700 font-bold">{crop.price}</span>
+                {/* Buttons */}
+                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                  <button
+                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                    onClick={() => alert("Buy Now clicked")}
+                  >
+                    Buy Now
+                  </button>
+                  <button
+                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                    onClick={() => alert("Added to Cart")}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
-      <AboutUs/>
-      <Footer/>
+      <AboutUs />
+      <Footer />
     </main>
   );
 }

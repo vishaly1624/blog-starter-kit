@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/pages/Navbar";
 import Hero from "@/pages/Hero";
 import Link from "next/link";
@@ -92,9 +94,24 @@ export default function HomePage() {
                                 Healthy and chemical-free wheat.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$30.00</span>
+
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
-
                     {/* Product 2 */}
                     <div className="bg-white rounded-lg shadow-md overflow-hidden group">
                         <img
@@ -108,6 +125,21 @@ export default function HomePage() {
                                 Juicy and farm-fresh tomatoes.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$12.00</span>
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -124,6 +156,21 @@ export default function HomePage() {
                                 Fresh fruits harvested daily from local farms.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$20.00</span>
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden group">
@@ -138,6 +185,21 @@ export default function HomePage() {
                                 Juicy and farm-fresh Rice.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$12.00</span>
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden group">
@@ -152,6 +214,21 @@ export default function HomePage() {
                                 Juicy and farm-fresh onions.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$12.00</span>
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden group">
@@ -166,12 +243,27 @@ export default function HomePage() {
                                 Juicy and farm-fresh Vegitables.
                             </p>
                             <span className="block mt-2 text-green-700 font-bold">$12.00</span>
+                            {/* Buttons */}
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                                <button
+                                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Buy Now clicked")}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition"
+                                    onClick={() => alert("Added to Cart")}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <AboutUs/>
-            <Footer/>
+            <AboutUs />
+            <Footer />
         </main>
     );
 }
