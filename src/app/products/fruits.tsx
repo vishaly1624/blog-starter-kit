@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "../../pages/Navbar";
-import Hero from "../app/products/Hero";
+import Hero from "@/pages/Hero";
 import AboutUs from "../../pages/AboutUs";
 import Footer from "../../pages/Footer";
 import { useCart, CartItem} from "../context/CartContext";
