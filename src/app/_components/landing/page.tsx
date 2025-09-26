@@ -3,9 +3,9 @@
 import Navbar from "@/pages/Navbar";
 import Hero from "@/pages/Hero";
 import Link from "next/link";
-import Footer from "./Footer";
-import AboutUs from "./AboutUs";
-import { useCart, CartItem } from "../app/context/CartContext";
+import AboutUs from "@/pages/AboutUs";
+import Footer from "@/pages/Footer";
+import { useCart, CartItem} from "@/app/context/CartContext"
 
 export default function HomePage() {
   const { addToCart } = useCart();

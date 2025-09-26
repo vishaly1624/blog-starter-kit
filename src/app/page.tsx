@@ -1,4 +1,4 @@
-import HomePage from "../pages/landing";
+import HomePage from "./_components/landing/page";
 
 export default function Index() {
 

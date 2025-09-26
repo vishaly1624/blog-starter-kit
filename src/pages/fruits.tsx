@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
-import { useCart, CartItem } from "../app/context/CartContext";
+import { useCart, CartItem} from "../app/context/CartContext";
 
 const fruitsData: CartItem[] = [
   { title: "Red Apples", description: "Crisp and sweet, packed with natural goodness.", image: "/images/apple.jpg", price: 15 },
