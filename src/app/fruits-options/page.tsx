@@ -1,4 +1,4 @@
-import FruitsPage from "@/pages/fruits";
+import FruitsPage from "@/app/products/fruits";
 
 export default function FrPage() {
   return (

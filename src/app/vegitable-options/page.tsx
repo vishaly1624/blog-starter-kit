@@ -1,4 +1,4 @@
-import VegetablesPage from "@/pages/vegetables";
+import VegetablesPage from "@/app/products/vegetables";
 
 export default function VGPage() {
   return (

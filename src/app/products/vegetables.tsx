@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Navbar from "./Navbar";
-import Hero from "./Hero";
-import Footer from "./Footer";
-import AboutUs from "./AboutUs";
+import Navbar from "../../pages/Navbar";
+import Hero from "../app/products/Hero";
+import Footer from "../../pages/Footer";
+import AboutUs from "../../pages/AboutUs";
 import { useCart, CartItem } from "@/app/context/CartContext";
 
 const vegetablesData: CartItem[] = [

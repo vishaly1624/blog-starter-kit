@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/pages/Navbar";
-import Hero from "@/pages/Hero";
+import Hero from "@/app/products/Hero";
 import Link from "next/link";
 import AboutUs from "@/pages/AboutUs";
 import Footer from "@/pages/Footer";

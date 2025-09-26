@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar from "./Navbar";
-import Hero from "./Hero";
-import AboutUs from "./AboutUs";
-import Footer from "./Footer";
+import Navbar from "../../pages/Navbar";
+import Hero from "../app/products/Hero";
+import AboutUs from "../../pages/AboutUs";
+import Footer from "../../pages/Footer";
 import { useCart, CartItem } from "@/app/context/CartContext";
 
 const cropsData: CartItem[] = [
