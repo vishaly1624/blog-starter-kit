@@ -5,7 +5,7 @@ import Hero from "@/pages/Hero";
 import Link from "next/link";
 import AboutUs from "@/pages/AboutUs";
 import Footer from "@/pages/Footer";
-import { useCart, CartItem} from "@/app/context/CartContext"
+import { useCart, CartItem } from "@/app/context/CartContext"
 
 export default function HomePage() {
   const { addToCart } = useCart();
@@ -17,6 +17,12 @@ export default function HomePage() {
     { title: "Rice", price: 12, image: "/images/rice.jpg", description: "Premium rice grains." },
     { title: "Fresh Onions", price: 12, image: "/images/onion.jpg", description: "Organic onions from farms." },
     { title: "Fresh Vegetables", price: 12, image: "/images/veg.jpg", description: "Mixed farm-fresh vegetables." },
+    { title: "Bell Peppers", description: "Colorful and crisp.", image: "/images/peppers.jpg", price: 11 },
+    { title: "Cauliflower", description: "Fresh florets ideal for roasting.", image: "/images/cauliflower.jpg", price: 13 },
+    { title: "Grapes", description: "Fresh clusters, ideal for snacking or juices.", image: "/images/grapes.jpg", price: 14 },
+    { title: "Strawberries", description: "Bright red and juicy, perfect for desserts.", image: "/images/strawberry.jpg", price: 18 },
+    { title: "Basmati Rice", description: "Aromatic long-grain rice", image: "/images/rice.jpg", price: 25 },
+    { title: "Mangoes", description: "Sweet and tropical, the king of fruits.", image: "/images/mango.jpg", price: 20 },
   ];
 
   return (

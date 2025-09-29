@@ -11,7 +11,16 @@ const cropsData: CartItem[] = [
   { title: "Basmati Rice", description: "Aromatic long-grain rice", image: "/images/rice.jpg", price: 25 },
   { title: "Maize", description: "Golden corn", image: "/images/maize.jpg", price: 18 },
   { title: "Barley", description: "Ideal for brewing", image: "/images/barley.jpg", price: 22 },
+  { title: "Sorghum", description: "Drought-resistant cereal grain", image: "/images/sorghum.jpg", price: 20 },
+  { title: "Millet", description: "Nutritious small-seed grain", image: "/images/millet.jpg", price: 15 },
+  { title: "Oats", description: "Perfect for breakfast and baking", image: "/images/oats.jpg", price: 28 },
+  { title: "Rye", description: "Used for bread and whiskey", image: "/images/rye.jpg", price: 24 },
+  { title: "Chickpeas", description: "High-protein legume", image: "/images/chickpeas.jpg", price: 35 },
+  { title: "Lentils", description: "Rich in protein and fiber", image: "/images/lentils.jpg", price: 32 },
+  { title: "Soybeans", description: "Great source of plant protein", image: "/images/soybeans.jpg", price: 40 },
+  { title: "Green Gram", description: "Nutritious mung beans, perfect for soups and sprouts", image: "/images/green-gram.jpg", price: 36 },
 ];
+
 
 export default function CropsPage() {
   const { addToCart } = useCart();

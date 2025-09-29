@@ -14,6 +14,21 @@ const vegetablesData: CartItem[] = [
   { title: "Carrots", description: "Crunchy and sweet.", image: "/images/carrot.jpg", price: 9 },
   { title: "Bell Peppers", description: "Colorful and crisp.", image: "/images/peppers.jpg", price: 11 },
   { title: "Cauliflower", description: "Fresh florets ideal for roasting.", image: "/images/cauliflower.jpg", price: 13 },
+  { title: "Cabbage", description: "Leafy and perfect for salads or stir-fries.", image: "/images/cabbage.jpg", price: 10 },
+  { title: "Cucumbers", description: "Cool and crisp, great for salads.", image: "/images/cucumber.jpg", price: 9 },
+  { title: "Broccoli", description: "Rich in vitamins and perfect for steaming.", image: "/images/broccoli.jpg", price: 14 },
+  { title: "Potatoes", description: "Versatile and starchy, perfect for many dishes.", image: "/images/potatoes.jpg", price: 11 },
+  { title: "Eggplants", description: "Tender and flavorful for cooking.", image: "/images/eggplant.jpg", price: 13 },
+  { title: "Zucchini", description: "Mild-flavored and great for roasting or grilling.", image: "/images/zucchini.jpg", price: 12 },
+  { title: "Green Beans", description: "Fresh and crunchy, ideal for steaming or stir-fry.", image: "/images/green-beans.jpg", price: 10 },
+  { title: "Pumpkin", description: "Sweet and rich, perfect for soups and pies.", image: "/images/pumpkin.jpg", price: 15 },
+  { title: "Radishes", description: "Crisp and slightly spicy, perfect for salads.", image: "/images/radishes.jpg", price: 8 },
+  { title: "Kale", description: "Dark leafy green, rich in nutrients.", image: "/images/kale.jpg", price: 16 },
+  { title: "Bok Choy", description: "Tender and mild, ideal for stir-fries.", image: "/images/bok-choy.jpg", price: 14 },
+  { title: "Asparagus", description: "Delicate flavor, perfect for grilling or steaming.", image: "/images/asparagus.jpg", price: 20 },
+  { title: "Brussels Sprouts", description: "Nutritious mini cabbages, great roasted.", image: "/images/brussels-sprouts.jpg", price: 18 },
+  { title: "Swiss Chard", description: "Leafy green with colorful stems, perfect for sautés.", image: "/images/swiss-chard.jpg", price: 17 },
+  { title: "Sweet Corn", description: "Tender and naturally sweet, perfect for boiling or grilling.", image: "/images/sweet-corn.jpg", price: 15 },
 ];
 
 export default function VegetablesPage() {

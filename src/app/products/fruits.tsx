@@ -13,6 +13,18 @@ const fruitsData: CartItem[] = [
   { title: "Mangoes", description: "Sweet and tropical, the king of fruits.", image: "/images/mango.jpg", price: 20 },
   { title: "Grapes", description: "Fresh clusters, ideal for snacking or juices.", image: "/images/grapes.jpg", price: 14 },
   { title: "Strawberries", description: "Bright red and juicy, perfect for desserts.", image: "/images/strawberry.jpg", price: 18 },
+  { title: "Pineapples", description: "Tropical delight, tangy and sweet.", image: "/images/pineapple.jpg", price: 22 },
+  { title: "Papaya", description: "Soft and sweet, excellent for digestion.", image: "/images/papaya.jpg", price: 16 },
+  { title: "Watermelon", description: "Refreshing and hydrating summer fruit.", image: "/images/watermelon.jpg", price: 12 },
+  { title: "Pears", description: "Sweet and juicy, perfect for snacking.", image: "/images/pear.jpg", price: 14 },
+  { title: "Cherries", description: "Small, sweet, and packed with antioxidants.", image: "/images/cherries.jpg", price: 25 },
+  { title: "Kiwi", description: "Tangy, vitamin-rich, and full of flavor.", image: "/images/kiwi.jpg", price: 20 },
+  { title: "Pomegranates", description: "Juicy seeds, loaded with antioxidants.", image: "/images/pomegranate.jpg", price: 18 },
+  { title: "Dragon Fruit", description: "Exotic, mildly sweet, and visually stunning.", image: "/images/dragon-fruit.jpg", price: 30 },
+  { title: "Lychee", description: "Sweet and aromatic, perfect for desserts and drinks.", image: "/images/lychee.jpg", price: 28 },
+  { title: "Guava", description: "Rich in Vitamin C, slightly tangy and sweet.", image: "/images/guava.jpg", price: 18 },
+   { title: "Apricots", description: "Sweet and soft, perfect for snacking or jams.", image: "/images/apricots.jpg", price: 22 },
+  { title: "Plums", description: "Juicy and sweet with a slight tartness.", image: "/images/plums.jpg", price: 20 },
 ];
 
 export default function FruitsPage() {
