@@ -13,7 +13,7 @@ export default function HomePage() {
   const products: CartItem[] = [
     { title: "Organic Wheat", price: 30, image: "/images/wheat.jpg", description: "High-quality grains from farms." },
     { title: "Fresh Tomatoes", price: 12, image: "/images/tomato.jpg", description: "Juicy and ripe tomatoes." },
-    { title: "Seasonal Fruits", price: 20, image: "/images/fr.png", description: "Fresh seasonal fruits." },
+    { title: "Seasonal Fruits", price: 20, image: "/images/fruits.png", description: "Fresh seasonal fruits." },
     { title: "Rice", price: 12, image: "/images/rice.jpg", description: "Premium rice grains." },
     { title: "Fresh Onions", price: 12, image: "/images/onion.jpg", description: "Organic onions from farms." },
     { title: "Fresh Vegetables", price: 12, image: "/images/veg.jpg", description: "Mixed farm-fresh vegetables." },
