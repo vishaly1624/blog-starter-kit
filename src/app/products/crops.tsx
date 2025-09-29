@@ -11,7 +11,7 @@ const cropsData: CartItem[] = [
   { title: "Basmati Rice", description: "Aromatic long-grain rice", image: "/images/rice.jpg", price: 25 },
   { title: "Maize", description: "Golden corn", image: "/images/maize.jpg", price: 18 },
   { title: "Barley", description: "Ideal for brewing", image: "/images/barley.jpg", price: 22 },
-  { title: "Sorghum", description: "Drought-resistant cereal grain", image: "/images/sorghum.jpg", price: 20 },
+  { title: "Sorghum", description: "Drought-resistant cereal grain", image: "/images/Sorghum.jpg", price: 20 },
   { title: "Millet", description: "Nutritious small-seed grain", image: "/images/millet.jpg", price: 15 },
   { title: "Oats", description: "Perfect for breakfast and baking", image: "/images/oats.jpg", price: 28 },
   { title: "Rye", description: "Used for bread and whiskey", image: "/images/rye.jpg", price: 24 },
