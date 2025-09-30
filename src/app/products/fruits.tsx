@@ -4,8 +4,56 @@ import Navbar from "../../pages/Navbar";
 import Hero from "@/pages/Hero";
 import AboutUs from "../../pages/AboutUs";
 import Footer from "../../pages/Footer";
-import { useCart, CartItem} from "../context/CartContext";
+import { useCart, CartItem } from "../context/CartContext";
+import { useState } from "react";
 
+// ---------------- TiltCard Component ----------------
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const [style, setStyle] = useState({
+    transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)",
+    boxShadow: "0 0 20px rgba(0,0,0,0.05)",
+    transition: "transform 0.5s ease, box-shadow 0.5s ease",
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 7;
+    const rotateY = ((x - centerX) / centerX) * 7;
+
+    setStyle({
+      transform: `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`,
+      boxShadow: `${-(rotateY * 2)}px ${rotateX * 2}px 25px rgba(0,0,0,0.15)`,
+      transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setStyle({
+      transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)",
+      boxShadow: "0 0 20px rgba(0,0,0,0.05)",
+      transition: "transform 0.5s ease, box-shadow 0.5s ease",
+    });
+  };
+
+  return (
+    <div
+      className="rounded-lg w-full"
+      style={style}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </div>
+  );
+}
+
+// ---------------- FruitsPage Component ----------------
 const fruitsData: CartItem[] = [
   { title: "Red Apples", description: "Crisp and sweet, packed with natural goodness.", image: "/images/apple.jpg", price: 15 },
   { title: "Bananas", description: "Rich in potassium, perfect for quick energy.", image: "/images/banana.jpg", price: 10 },
@@ -23,12 +71,13 @@ const fruitsData: CartItem[] = [
   { title: "Dragon Fruit", description: "Exotic, mildly sweet, and visually stunning.", image: "/images/dragon-fruit.jpg", price: 30 },
   { title: "Lychee", description: "Sweet and aromatic, perfect for desserts and drinks.", image: "/images/lychee.jpg", price: 28 },
   { title: "Guava", description: "Rich in Vitamin C, slightly tangy and sweet.", image: "/images/guava.jpg", price: 18 },
-   { title: "Apricots", description: "Sweet and soft, perfect for snacking or jams.", image: "/images/apricots.jpg", price: 22 },
+  { title: "Apricots", description: "Sweet and soft, perfect for snacking or jams.", image: "/images/apricots.jpg", price: 22 },
   { title: "Plums", description: "Juicy and sweet with a slight tartness.", image: "/images/plums.jpg", price: 20 },
 ];
 
 export default function FruitsPage() {
-  const { addToCart } = useCart(); // ✅ Safe because CartProvider wraps the app
+  const { addToCart } = useCart();
+  const [selectedFruit, setSelectedFruit] = useState<CartItem | null>(null);
 
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
@@ -36,47 +85,85 @@ export default function FruitsPage() {
       <Hero />
 
       {/* Fruit Collection Section */}
-      <section className="px-6 py-12 bg-red-50">
-        <h2 className="text-2xl font-bold text-center mb-8 text-red-900 tracking-wide">
+      <section className="px-4 sm:px-6 lg:px-12 py-12 bg-red-50">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-red-900 tracking-wide">
           Our Fruit Collection
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {fruitsData.map((fruit: CartItem, index: number) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden group">
-              <img
-                src={fruit.image}
-                alt={fruit.title}
-                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{fruit.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">{fruit.description}</p>
-                <span className="block mt-2 text-red-700 font-bold">${fruit.price}</span>
-
-                {/* Action Buttons */}
-                <div className="mt-4 flex flex-col sm:flex-row gap-2 w-full">
-                  <button
-                    className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
-                    onClick={() => alert(`💳 Buy Now clicked for ${fruit.title}`)}
-                  >
-                    Buy Now
-                  </button>
-                  <button
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base lg:text-lg"
-                    onClick={() => {
-                      addToCart(fruit);
-                      alert(`✅ ${fruit.title} added to cart`);
-                    }}
-                  >
-                    Add to Cart
-                  </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {fruitsData.map((fruit, index) => (
+            <TiltCard key={index}>
+              <div
+                className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full cursor-pointer"
+                onClick={() => setSelectedFruit(fruit)}
+              >
+                <img
+                  src={fruit.image}
+                  alt={fruit.title}
+                  className="w-full h-56 sm:h-64 md:h-72 object-cover"
+                />
+                <div className="p-4 flex-1 flex flex-col">
+                  <h3 className="text-lg sm:text-xl font-semibold">{fruit.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600 mt-1 flex-1">{fruit.description}</p>
+                  <span className="block mt-2 text-red-700 font-bold text-lg sm:text-xl">${fruit.price}</span>
+                  <div className="mt-4 flex flex-col sm:flex-row gap-2 w-full">
+                    <button
+                      className="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base"
+                      onClick={(e) => { e.stopPropagation(); alert(`💳 Buy Now clicked for ${fruit.title}`); }}
+                    >
+                      Buy Now
+                    </button>
+                    <button
+                      className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white font-medium py-2 px-4 rounded-md transition transform hover:scale-105 text-sm sm:text-base"
+                      onClick={(e) => { e.stopPropagation(); addToCart(fruit); alert(`✅ ${fruit.title} added to cart`); }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </section>
+
+      {/* Fruit Popup Modal */}
+      {selectedFruit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 sm:p-6 md:p-12">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md sm:max-w-lg w-full p-4 sm:p-6 md:p-8 relative transition-transform duration-500 scale-95">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-red-500 text-2xl"
+              onClick={() => setSelectedFruit(null)}
+            >
+              &times;
+            </button>
+
+            <img
+              src={selectedFruit.image}
+              alt={selectedFruit.title}
+              className="w-full h-48 sm:h-64 md:h-72 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl sm:text-2xl font-bold text-red-800 mb-2">{selectedFruit.title}</h3>
+            <p className="text-gray-700 mb-3 text-sm sm:text-base">{selectedFruit.description}</p>
+            <span className="block text-lg sm:text-xl text-red-700 font-semibold mb-4">${selectedFruit.price}</span>
+
+            <div className="flex flex-col sm:flex-row gap-2 w-full">
+              <button
+                className="flex-1 bg-green-600 hover:bg-green-500 text-white py-2 rounded-md"
+                onClick={() => alert(`💳 Buy Now clicked for ${selectedFruit.title}`)}
+              >
+                Buy Now
+              </button>
+              <button
+                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white py-2 rounded-md"
+                onClick={() => { addToCart(selectedFruit); alert(`✅ ${selectedFruit.title} added to cart`); }}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <AboutUs />
       <Footer />
