@@ -4,44 +4,22 @@ import { useState } from "react";
 
 interface Product {
   id: number;
-  category: keyof typeof productOptions;
   name: string;
   price: number;
-  stock: number; // in kg
+  stock: number;
 }
-
-// Expanded product options
-const productOptions = {
-  Crops: ["Wheat", "Rice", "Maize", "Barley", "Oats", "Sorghum", "Millet", "Rye"],
-  Vegetables: ["Tomato", "Onion", "Spinach", "Carrot", "Cabbage", "Cauliflower", "Potato", "Bell Pepper", "Lettuce"],
-  Fruits: ["Apple", "Banana", "Mango", "Orange", "Grapes", "Pineapple", "Strawberry", "Papaya", "Watermelon", "Blueberry"],
-};
 
 export default function SellerDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [formData, setFormData] = useState({
-    category: "Crops" as keyof typeof productOptions,
-    name: productOptions["Crops"][0],
-    price: "",
-    stock: "",
-  });
+  const [formData, setFormData] = useState({ name: "", price: "", stock: "" });
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const category = e.target.value as keyof typeof productOptions;
-    setFormData({
-      ...formData,
-      category,
-      name: productOptions[category][0], // default first product
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleAddProduct = (e: React.FormEvent) => {
     e.preventDefault();
-    const { category, name, price, stock } = formData;
+    const { name, price, stock } = formData;
 
     if (!name || !price || !stock) {
       alert("Please fill all fields");
@@ -50,19 +28,13 @@ export default function SellerDashboard() {
 
     const newProduct: Product = {
       id: products.length + 1,
-      category,
       name,
       price: parseFloat(price),
-      stock: parseFloat(stock),
+      stock: parseInt(stock),
     };
 
     setProducts([...products, newProduct]);
-    setFormData({
-      category,
-      name: productOptions[category][0],
-      price: "",
-      stock: "",
-    });
+    setFormData({ name: "", price: "", stock: "" });
   };
 
   return (
@@ -93,36 +65,15 @@ export default function SellerDashboard() {
         {/* Add Product Form */}
         <div className="bg-white shadow-md rounded-xl p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Add New Product</h2>
-          <form className="grid grid-cols-1 sm:grid-cols-4 gap-4" onSubmit={handleAddProduct}>
-            {/* Category Dropdown */}
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleCategoryChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {Object.keys(productOptions).map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-
-            {/* Product Name Dropdown */}
-            <select
+          <form className="grid grid-cols-1 sm:grid-cols-3 gap-4" onSubmit={handleAddProduct}>
+            <input
+              type="text"
               name="name"
+              placeholder="Product Name"
               value={formData.name}
               onChange={handleChange}
               className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {productOptions[formData.category].map((prod) => (
-                <option key={prod} value={prod}>
-                  {prod}
-                </option>
-              ))}
-            </select>
-
-            {/* Price Input */}
+            />
             <input
               type="number"
               name="price"
@@ -131,23 +82,17 @@ export default function SellerDashboard() {
               onChange={handleChange}
               className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-
-            {/* Stock Input with kg */}
-            <div className="relative">
-              <input
-                type="number"
-                name="stock"
-                placeholder="Stock"
-                value={formData.stock}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 pr-12"
-              />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">kg</span>
-            </div>
-
+            <input
+              type="number"
+              name="stock"
+              placeholder="Stock"
+              value={formData.stock}
+              onChange={handleChange}
+              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
             <button
               type="submit"
-              className="sm:col-span-4 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+              className="sm:col-span-3 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
             >
               Add Product
             </button>
@@ -164,7 +109,6 @@ export default function SellerDashboard() {
               <thead>
                 <tr className="bg-green-100">
                   <th className="border px-4 py-2 text-left">ID</th>
-                  <th className="border px-4 py-2 text-left">Category</th>
                   <th className="border px-4 py-2 text-left">Name</th>
                   <th className="border px-4 py-2 text-left">Price ($)</th>
                   <th className="border px-4 py-2 text-left">Stock</th>
@@ -174,10 +118,9 @@ export default function SellerDashboard() {
                 {products.map((product) => (
                   <tr key={product.id} className="hover:bg-green-50">
                     <td className="border px-4 py-2">{product.id}</td>
-                    <td className="border px-4 py-2">{product.category}</td>
                     <td className="border px-4 py-2">{product.name}</td>
                     <td className="border px-4 py-2">{product.price.toFixed(2)}</td>
-                    <td className="border px-4 py-2">{product.stock} kg</td>
+                    <td className="border px-4 py-2">{product.stock}</td>
                   </tr>
                 ))}
               </tbody>
