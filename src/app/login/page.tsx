@@ -1,190 +1,144 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-interface Product {
-  id: number;
-  category: keyof typeof productOptions;
-  name: string;
-  price: number;
-  stock: number; // in kg
-}
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(true); // toggle login/register
+  const [role, setRole] = useState<"customer" | "seller">("customer"); // role selector
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const router = useRouter();
 
-// Expanded product options
-const productOptions = {
-  Crops: ["Wheat", "Rice", "Maize", "Barley", "Oats", "Sorghum", "Millet", "Rye"],
-  Vegetables: ["Tomato", "Onion", "Spinach", "Carrot", "Cabbage", "Cauliflower", "Potato", "Bell Pepper", "Lettuce"],
-  Fruits: ["Apple", "Banana", "Mango", "Orange", "Grapes", "Pineapple", "Strawberry", "Papaya", "Watermelon", "Blueberry"],
-};
-
-export default function SellerDashboard() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [formData, setFormData] = useState({
-    category: "Crops" as keyof typeof productOptions,
-    name: productOptions["Crops"][0],
-    price: "",
-    stock: "",
-  });
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const category = e.target.value as keyof typeof productOptions;
-    setFormData({
-      ...formData,
-      category,
-      name: productOptions[category][0], // default first product
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleAddProduct = (e: React.FormEvent) => {
+  const handleRoleChange = (newRole: "customer" | "seller") => {
+    setRole(newRole);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { category, name, price, stock } = formData;
 
-    if (!name || !price || !stock) {
-      alert("Please fill all fields");
-      return;
+    if (isLogin) {
+      if (formData.email && formData.password) {
+        alert(`${role.charAt(0).toUpperCase() + role.slice(1)} login successful ✅`);
+
+        // Redirect based on role
+        if (role === "customer") {
+          router.push("/"); // Customer goes to home page
+        } else {
+          router.push("/seller"); // Seller goes to dashboard
+        }
+      } else {
+        alert("Please enter email & password");
+      }
+    } else {
+      if (formData.name && formData.email && formData.password) {
+        alert(`${role.charAt(0).toUpperCase() + role.slice(1)} registration successful ✅ Now you can login`);
+        setIsLogin(true);
+      } else {
+        alert("Please fill all fields");
+      }
     }
-
-    const newProduct: Product = {
-      id: products.length + 1,
-      category,
-      name,
-      price: parseFloat(price),
-      stock: parseFloat(stock),
-    };
-
-    setProducts([...products, newProduct]);
-    setFormData({
-      category,
-      name: productOptions[category][0],
-      price: "",
-      stock: "",
-    });
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md flex flex-col">
-        <div className="p-6 text-2xl font-bold text-green-700 border-b">Seller Panel</div>
-        <nav className="flex-1 p-4 space-y-2">
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Dashboard
-          </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Add Product
-          </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            My Products
-          </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Orders
-          </button>
-        </nav>
-      </aside>
+    <div
+      className="flex justify-center items-center min-h-screen px-4 bg-cover bg-center relative"
+      style={{ backgroundImage: "url('/images/bg.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Main content */}
-      <main className="flex-1 p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, Seller!</h1>
+      <div className="relative bg-white shadow-lg rounded-xl p-8 w-full max-w-md z-10">
+        <h2 className="text-2xl font-bold text-center text-green-700 mb-6">
+          {isLogin ? "Login" : "Register"}
+        </h2>
 
-        {/* Add Product Form */}
-        <div className="bg-white shadow-md rounded-xl p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Add New Product</h2>
-          <form className="grid grid-cols-1 sm:grid-cols-4 gap-4" onSubmit={handleAddProduct}>
-            {/* Category Dropdown */}
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleCategoryChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {Object.keys(productOptions).map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+        <div className="flex justify-center gap-4 mb-4">
+          <button
+            onClick={() => handleRoleChange("customer")}
+            className={`px-4 py-2 rounded-md font-medium transition ${
+              role === "customer" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Customer
+          </button>
+          <button
+            onClick={() => handleRoleChange("seller")}
+            className={`px-4 py-2 rounded-md font-medium transition ${
+              role === "seller" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Seller
+          </button>
+        </div>
 
-            {/* Product Name Dropdown */}
-            <select
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {!isLogin && (
+            <input
+              type="text"
               name="name"
+              placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {productOptions[formData.category].map((prod) => (
-                <option key={prod} value={prod}>
-                  {prod}
-                </option>
-              ))}
-            </select>
-
-            {/* Price Input */}
-            <input
-              type="number"
-              name="price"
-              placeholder="Price ($)"
-              value={formData.price}
-              onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
             />
-
-            {/* Stock Input with kg */}
-            <div className="relative">
-              <input
-                type="number"
-                name="stock"
-                placeholder="Stock"
-                value={formData.stock}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 pr-12"
-              />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">kg</span>
-            </div>
-
-            <button
-              type="submit"
-              className="sm:col-span-4 bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
-            >
-              Add Product
-            </button>
-          </form>
-        </div>
-
-        {/* My Products Table */}
-        <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-2xl font-semibold mb-4">My Products</h2>
-          {products.length === 0 ? (
-            <p className="text-gray-600">No products added yet.</p>
-          ) : (
-            <table className="w-full table-auto border-collapse">
-              <thead>
-                <tr className="bg-green-100">
-                  <th className="border px-4 py-2 text-left">ID</th>
-                  <th className="border px-4 py-2 text-left">Category</th>
-                  <th className="border px-4 py-2 text-left">Name</th>
-                  <th className="border px-4 py-2 text-left">Price ($)</th>
-                  <th className="border px-4 py-2 text-left">Stock</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="hover:bg-green-50">
-                    <td className="border px-4 py-2">{product.id}</td>
-                    <td className="border px-4 py-2">{product.category}</td>
-                    <td className="border px-4 py-2">{product.name}</td>
-                    <td className="border px-4 py-2">{product.price.toFixed(2)}</td>
-                    <td className="border px-4 py-2">{product.stock} kg</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           )}
-        </div>
-      </main>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Your Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2 px-4 rounded-md transition"
+          >
+            {isLogin ? "Login" : "Register"}
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-gray-600 mt-4">
+          {isLogin ? (
+            <>
+              Don’t have an account?{" "}
+              <span
+                onClick={() => setIsLogin(false)}
+                className="text-green-700 font-semibold cursor-pointer"
+              >
+                Register here
+              </span>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <span
+                onClick={() => setIsLogin(true)}
+                className="text-green-700 font-semibold cursor-pointer"
+              >
+                Login here
+              </span>
+            </>
+          )}
+        </p>
+      </div>
     </div>
   );
 }
