@@ -56,28 +56,155 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 
 // ---------------- VegetablesPage Component ----------------
 const vegetablesData: CartItem[] = [
-  { title: "Fresh Tomatoes", description: "Juicy and ripe.", image: "/images/tomato.jpg", price: 12 },
-  { title: "Organic Onions", description: "Pungent and flavorful.", image: "/images/onion.jpg", price: 10 },
-  { title: "Green Spinach", description: "Leafy and rich in iron.", image: "/images/spinach.jpg", price: 8 },
-  { title: "Carrots", description: "Crunchy and sweet.", image: "/images/carrot.jpg", price: 9 },
-  { title: "Bell Peppers", description: "Colorful and crisp.", image: "/images/peppers.jpg", price: 11 },
-  { title: "Cauliflower", description: "Fresh florets ideal for roasting.", image: "/images/cauliflower.jpg", price: 13 },
-  { title: "Cabbage", description: "Leafy and perfect for salads or stir-fries.", image: "/images/cabbage.jpg", price: 10 },
-  { title: "Cucumbers", description: "Cool and crisp, great for salads.", image: "/images/cucumber.jpg", price: 9 },
-  { title: "Broccoli", description: "Rich in vitamins and perfect for steaming.", image: "/images/broccoli.jpg", price: 14 },
-  { title: "Potatoes", description: "Versatile and starchy, perfect for many dishes.", image: "/images/potatoes.jpg", price: 11 },
-  { title: "Eggplants", description: "Tender and flavorful for cooking.", image: "/images/eggplant.jpg", price: 13 },
-  { title: "Zucchini", description: "Mild-flavored and great for roasting or grilling.", image: "/images/zucchini.jpg", price: 12 },
-  { title: "Green Beans", description: "Fresh and crunchy, ideal for steaming or stir-fry.", image: "/images/green-beans.jpg", price: 10 },
-  { title: "Pumpkin", description: "Sweet and rich, perfect for soups and pies.", image: "/images/pumpkin.jpg", price: 15 },
-  { title: "Radishes", description: "Crisp and slightly spicy, perfect for salads.", image: "/images/radishes.jpg", price: 8 },
-  { title: "Kale", description: "Dark leafy green, rich in nutrients.", image: "/images/kale.jpg", price: 16 },
-  { title: "Bok Choy", description: "Tender and mild, ideal for stir-fries.", image: "/images/bok-choy.jpg", price: 14 },
-  { title: "Asparagus", description: "Delicate flavor, perfect for grilling or steaming.", image: "/images/asparagus.jpg", price: 20 },
-  { title: "Brussels Sprouts", description: "Nutritious mini cabbages, great roasted.", image: "/images/brussels-sprouts.jpg", price: 18 },
-  { title: "Swiss Chard", description: "Leafy green with colorful stems, perfect for sautés.", image: "/images/swiss-chard.jpg", price: 17 },
-  { title: "Sweet Corn", description: "Tender and naturally sweet, perfect for boiling or grilling.", image: "/images/sweet-corn.jpg", price: 15 },
+  { 
+    title: "Fresh Tomatoes", 
+    description: "Juicy and ripe.", 
+    image: "/images/tomato.jpg", 
+    price: 12,
+    details: "Farm-fresh, hand-picked tomatoes, rich in antioxidants like lycopene. Perfect for salads, sauces, soups, and cooking. Naturally sweet and packed with nutrients." 
+  },
+  { 
+    title: "Organic Onions", 
+    description: "Pungent and flavorful.", 
+    image: "/images/onion.jpg", 
+    price: 10,
+    details: "Organic onions grown without synthetic chemicals. Enhance flavor in curries, soups, and stir-fries. Rich in vitamins, antioxidants, and natural compounds that promote health." 
+  },
+  { 
+    title: "Green Spinach", 
+    description: "Leafy and rich in iron.", 
+    image: "/images/spinach.jpg", 
+    price: 8,
+    details: "Fresh, nutrient-rich spinach leaves. High in iron, calcium, and vitamins A and C. Ideal for salads, smoothies, sautés, and soups." 
+  },
+  { 
+    title: "Carrots", 
+    description: "Crunchy and sweet.", 
+    image: "/images/carrot.jpg", 
+    price: 9,
+    details: "Naturally sweet, crunchy carrots full of beta-carotene and fiber. Perfect for snacking, salads, soups, and roasting." 
+  },
+  { 
+    title: "Bell Peppers", 
+    description: "Colorful and crisp.", 
+    image: "/images/peppers.jpg", 
+    price: 11,
+    details: "Vibrant bell peppers in red, yellow, and green. Crisp and sweet, rich in vitamin C and antioxidants. Great for salads, stir-fries, and grilling." 
+  },
+  { 
+    title: "Cauliflower", 
+    description: "Fresh florets ideal for roasting.", 
+    image: "/images/cauliflower.jpg", 
+    price: 13,
+    details: "Fresh cauliflower florets, naturally low in calories and rich in vitamins C and K. Excellent for roasting, steaming, soups, and curries." 
+  },
+  { 
+    title: "Cabbage", 
+    description: "Leafy and perfect for salads or stir-fries.", 
+    image: "/images/cabbage.jpg", 
+    price: 10,
+    details: "Crisp, green cabbage leaves packed with fiber and vitamin C. Ideal for salads, coleslaws, soups, and stir-fries." 
+  },
+  { 
+    title: "Cucumbers", 
+    description: "Cool and crisp, great for salads.", 
+    image: "/images/cucumber.jpg", 
+    price: 9,
+    details: "Refreshing cucumbers, hydrating and low in calories. Perfect for salads, sandwiches, pickles, and detox waters." 
+  },
+  { 
+    title: "Broccoli", 
+    description: "Rich in vitamins and perfect for steaming.", 
+    image: "/images/broccoli.jpg", 
+    price: 14,
+    details: "Nutritious broccoli florets high in vitamins C, K, and fiber. Great for steaming, roasting, soups, and stir-fries." 
+  },
+  { 
+    title: "Potatoes", 
+    description: "Versatile and starchy, perfect for many dishes.", 
+    image: "/images/potatoes.jpg", 
+    price: 11,
+    details: "High-quality potatoes, versatile and filling. Ideal for boiling, roasting, frying, mashing, or baking. Rich in carbohydrates and essential nutrients." 
+  },
+  { 
+    title: "Eggplants", 
+    description: "Tender and flavorful for cooking.", 
+    image: "/images/eggplant.jpg", 
+    price: 13,
+    details: "Fresh, tender eggplants with a mild, rich flavor. Great for roasting, grilling, curries, and stews. Low in calories and high in fiber." 
+  },
+  { 
+    title: "Zucchini", 
+    description: "Mild-flavored and great for roasting or grilling.", 
+    image: "/images/zucchini.jpg", 
+    price: 12,
+    details: "Fresh zucchini with a mild taste, ideal for grilling, roasting, stir-fries, and sautés. Rich in antioxidants and low in calories." 
+  },
+  { 
+    title: "Green Beans", 
+    description: "Fresh and crunchy, ideal for steaming or stir-fry.", 
+    image: "/images/green-beans.jpg", 
+    price: 10,
+    details: "Crisp green beans full of vitamins A, C, and K. Perfect for steaming, sautéing, stir-fries, or adding to casseroles." 
+  },
+  { 
+    title: "Pumpkin", 
+    description: "Sweet and rich, perfect for soups and pies.", 
+    image: "/images/pumpkin.jpg", 
+    price: 15,
+    details: "Fresh pumpkin, naturally sweet and packed with vitamins A and C. Ideal for soups, pies, stews, and baking." 
+  },
+  { 
+    title: "Radishes", 
+    description: "Crisp and slightly spicy, perfect for salads.", 
+    image: "/images/radishes.jpg", 
+    price: 8,
+    details: "Crunchy, mildly spicy radishes. Great for salads, garnishes, pickles, and detox drinks. Low in calories and high in fiber." 
+  },
+  { 
+    title: "Kale", 
+    description: "Dark leafy green, rich in nutrients.", 
+    image: "/images/kale.jpg", 
+    price: 16,
+    details: "Dark green kale leaves loaded with vitamins A, K, and C. Excellent for smoothies, salads, sautés, and soups. Known for its health benefits." 
+  },
+  { 
+    title: "Bok Choy", 
+    description: "Tender and mild, ideal for stir-fries.", 
+    image: "/images/bok-choy.jpg", 
+    price: 14,
+    details: "Fresh, tender bok choy leaves and stems. Mild in flavor, perfect for stir-fries, soups, and steaming. Rich in calcium and vitamins." 
+  },
+  { 
+    title: "Asparagus", 
+    description: "Delicate flavor, perfect for grilling or steaming.", 
+    image: "/images/asparagus.jpg", 
+    price: 20,
+    details: "Tender asparagus spears with a delicate taste. Excellent for steaming, grilling, roasting, and sautés. Rich in folate, vitamins A, C, and K." 
+  },
+  { 
+    title: "Brussels Sprouts", 
+    description: "Nutritious mini cabbages, great roasted.", 
+    image: "/images/brussels-sprouts.jpg", 
+    price: 18,
+    details: "Small, flavorful cabbages rich in fiber, vitamins, and antioxidants. Perfect for roasting, sautéing, or adding to salads." 
+  },
+  { 
+    title: "Swiss Chard", 
+    description: "Leafy green with colorful stems, perfect for sautés.", 
+    image: "/images/swiss-chard.jpg", 
+    price: 17,
+    details: "Leafy green with vibrant stems, packed with vitamins A, C, and K. Great for sautéing, soups, and salads." 
+  },
+  { 
+    title: "Sweet Corn", 
+    description: "Tender and naturally sweet, perfect for boiling or grilling.", 
+    image: "/images/sweet-corn.jpg", 
+    price: 15,
+    details: "Fresh, sweet corn on the cob. Ideal for boiling, grilling, salads, and soups. Rich in fiber and natural sugars." 
+  },
 ];
+
 
 export default function VegetablesPage() {
   const { addToCart } = useCart();
@@ -155,7 +282,7 @@ export default function VegetablesPage() {
             </div>
 
             <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedVeg.title}</h3>
-            <p className="text-gray-700 mb-3 text-sm sm:text-base">{selectedVeg.description}</p>
+             <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedVeg.details}</p>
             <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedVeg.price}</span>
 
             <div className="flex flex-col sm:flex-row gap-2 w-full">

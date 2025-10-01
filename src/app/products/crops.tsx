@@ -55,19 +55,92 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 
 // ---------------- CropsPage Component ----------------
 const cropsData: CartItem[] = [
-  { title: "Organic Wheat", description: "Rich in nutrients", image: "/images/wheat.jpg", price: 30 },
-  { title: "Basmati Rice", description: "Aromatic long-grain rice", image: "/images/rice.jpg", price: 25 },
-  { title: "Maize", description: "Golden corn", image: "/images/maize.jpg", price: 18 },
-  { title: "Barley", description: "Ideal for brewing", image: "/images/barley.jpg", price: 22 },
-  { title: "Sorghum", description: "Drought-resistant cereal grain", image: "/images/Sorghum.jpg", price: 20 },
-  { title: "Millet", description: "Nutritious small-seed grain", image: "/images/millet.jpg", price: 15 },
-  { title: "Oats", description: "Perfect for breakfast and baking", image: "/images/oats.jpg", price: 28 },
-  { title: "Rye", description: "Used for bread and whiskey", image: "/images/rye.jpg", price: 24 },
-  { title: "Chickpeas", description: "High-protein legume", image: "/images/chickpeas.jpg", price: 35 },
-  { title: "Lentils", description: "Rich in protein and fiber", image: "/images/lentils.jpg", price: 32 },
-  { title: "Soybeans", description: "Great source of plant protein", image: "/images/soybeans.jpg", price: 40 },
-  { title: "Green Gram", description: "Nutritious mung beans, perfect for soups and sprouts", image: "/images/green-gram.jpg", price: 36 },
+  { 
+    title: "Organic Wheat", 
+    description: "Rich in nutrients", 
+    image: "/images/wheat.jpg", 
+    price: 30,
+    details: "Certified organic wheat, rich in fiber, vitamins, and minerals. Ideal for baking bread, making pasta, and everyday cooking. Carefully harvested and cleaned to maintain freshness and nutritional value." 
+  },
+  { 
+    title: "Basmati Rice", 
+    description: "Aromatic long-grain rice", 
+    image: "/images/rice.jpg", 
+    price: 25,
+    details: "Premium Basmati rice with a delicate aroma and fluffy texture. Perfect for biryanis, pilafs, and other traditional dishes. Naturally aged to enhance fragrance and cooking quality." 
+  },
+  { 
+    title: "Maize", 
+    description: "Golden corn", 
+    image: "/images/maize.jpg", 
+    price: 18,
+    details: "Golden maize grains, high in carbohydrates and natural sweetness. Great for boiling, roasting, making cornmeal, or as feed for livestock. Rich in fiber and essential nutrients." 
+  },
+  { 
+    title: "Barley", 
+    description: "Ideal for brewing", 
+    image: "/images/barley.jpg", 
+    price: 22,
+    details: "High-quality barley grains, ideal for brewing beer, soups, and porridge. Rich in fiber, vitamins, and minerals. Carefully processed to maintain quality and nutritional value." 
+  },
+  { 
+    title: "Sorghum", 
+    description: "Drought-resistant cereal grain", 
+    image: "/images/Sorghum.jpg", 
+    price: 20,
+    details: "Nutritious sorghum, a drought-resistant cereal rich in protein, fiber, and antioxidants. Suitable for porridge, baking, and animal feed. Naturally grown and sustainably sourced." 
+  },
+  { 
+    title: "Millet", 
+    description: "Nutritious small-seed grain", 
+    image: "/images/millet.jpg", 
+    price: 15,
+    details: "Whole grain millet, rich in protein, fiber, and essential minerals. Perfect for porridge, baking, and healthy snacks. Naturally gluten-free and easily digestible." 
+  },
+  { 
+    title: "Oats", 
+    description: "Perfect for breakfast and baking", 
+    image: "/images/oats.jpg", 
+    price: 28,
+    details: "Nutritious oats, perfect for breakfast, smoothies, baking, and cereals. Rich in fiber, protein, and heart-healthy beta-glucans. Carefully processed to maintain freshness and taste." 
+  },
+  { 
+    title: "Rye", 
+    description: "Used for bread and whiskey", 
+    image: "/images/rye.jpg", 
+    price: 24,
+    details: "High-quality rye grains, commonly used for baking bread and brewing whiskey. Rich in fiber, protein, and essential nutrients. Sourced from trusted farms to ensure quality." 
+  },
+  { 
+    title: "Chickpeas", 
+    description: "High-protein legume", 
+    image: "/images/chickpeas.jpg", 
+    price: 35,
+    details: "Fresh chickpeas, rich in plant-based protein and fiber. Ideal for curries, salads, soups, and snacks. Naturally grown, nutritious, and versatile in cooking." 
+  },
+  { 
+    title: "Lentils", 
+    description: "Rich in protein and fiber", 
+    image: "/images/lentils.jpg", 
+    price: 32,
+    details: "High-quality lentils, packed with protein, fiber, and essential vitamins. Perfect for soups, stews, curries, and salads. Naturally nutritious and easy to cook." 
+  },
+  { 
+    title: "Soybeans", 
+    description: "Great source of plant protein", 
+    image: "/images/soybeans.jpg", 
+    price: 40,
+    details: "Nutritious soybeans, high in protein, fiber, and healthy fats. Ideal for making tofu, soy milk, and various dishes. Sustainably sourced and rich in essential nutrients." 
+  },
+  { 
+    title: "Green Gram", 
+    description: "Nutritious mung beans, perfect for soups and sprouts", 
+    image: "/images/green-gram.jpg", 
+    price: 36,
+    details: "Fresh green gram (mung beans), rich in protein, fiber, and essential minerals. Perfect for soups, stews, sprouts, and salads. Naturally grown and highly versatile in cooking." 
+  },
 ];
+
 
 export default function CropsPage() {
   const { addToCart } = useCart();
@@ -137,7 +210,7 @@ export default function CropsPage() {
               className="w-full h-48 sm:h-64 md:h-72 object-cover rounded-lg mb-4"
             />
             <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedCrop.title}</h3>
-            <p className="text-gray-700 mb-3 text-sm sm:text-base">{selectedCrop.description}</p>
+             <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedCrop.details}</p>
             <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedCrop.price}</span>
 
             <div className="flex flex-col sm:flex-row gap-2 w-full">

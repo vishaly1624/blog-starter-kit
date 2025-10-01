@@ -55,24 +55,132 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 
 // ---------------- FruitsPage Component ----------------
 const fruitsData: CartItem[] = [
-  { title: "Red Apples", description: "Crisp and sweet, packed with natural goodness.", image: "/images/apple.jpg", price: 15 },
-  { title: "Bananas", description: "Rich in potassium, perfect for quick energy.", image: "/images/banana.jpg", price: 10 },
-  { title: "Oranges", description: "Juicy and tangy, loaded with Vitamin C.", image: "/images/orange.jpg", price: 12 },
-  { title: "Mangoes", description: "Sweet and tropical, the king of fruits.", image: "/images/mango.jpg", price: 20 },
-  { title: "Grapes", description: "Fresh clusters, ideal for snacking or juices.", image: "/images/grapes.jpg", price: 14 },
-  { title: "Strawberries", description: "Bright red and juicy, perfect for desserts.", image: "/images/strawberry.jpg", price: 18 },
-  { title: "Pineapples", description: "Tropical delight, tangy and sweet.", image: "/images/pineapple.jpg", price: 22 },
-  { title: "Papaya", description: "Soft and sweet, excellent for digestion.", image: "/images/papaya.jpg", price: 16 },
-  { title: "Watermelon", description: "Refreshing and hydrating summer fruit.", image: "/images/watermelon.jpg", price: 12 },
-  { title: "Pears", description: "Sweet and juicy, perfect for snacking.", image: "/images/pear.jpg", price: 14 },
-  { title: "Cherries", description: "Small, sweet, and packed with antioxidants.", image: "/images/cherries.jpg", price: 25 },
-  { title: "Kiwi", description: "Tangy, vitamin-rich, and full of flavor.", image: "/images/kiwi.jpg", price: 20 },
-  { title: "Pomegranates", description: "Juicy seeds, loaded with antioxidants.", image: "/images/pomegranate.jpg", price: 18 },
-  { title: "Dragon Fruit", description: "Exotic, mildly sweet, and visually stunning.", image: "/images/dragon-fruit.jpg", price: 30 },
-  { title: "Lychee", description: "Sweet and aromatic, perfect for desserts and drinks.", image: "/images/lychee.jpg", price: 28 },
-  { title: "Guava", description: "Rich in Vitamin C, slightly tangy and sweet.", image: "/images/guava.jpg", price: 18 },
-  { title: "Apricots", description: "Sweet and soft, perfect for snacking or jams.", image: "/images/apricots.jpg", price: 22 },
-  { title: "Plums", description: "Juicy and sweet with a slight tartness.", image: "/images/plums.jpg", price: 20 },
+  { 
+    title: "Red Apples", 
+    description: "Crisp and sweet, packed with natural goodness.", 
+    image: "/images/apple.jpg", 
+    price: 15,
+    details: "Fresh red apples, crisp and naturally sweet. Rich in fiber, antioxidants, and vitamin C. Perfect for snacking, baking, making juices, or adding to salads." 
+  },
+  { 
+    title: "Bananas", 
+    description: "Rich in potassium, perfect for quick energy.", 
+    image: "/images/banana.jpg", 
+    price: 10,
+    details: "Ripe bananas, high in potassium and natural sugars for quick energy. Ideal for smoothies, snacks, baking, or as a natural sweetener in recipes." 
+  },
+  { 
+    title: "Oranges", 
+    description: "Juicy and tangy, loaded with Vitamin C.", 
+    image: "/images/orange.jpg", 
+    price: 12,
+    details: "Fresh, juicy oranges packed with vitamin C and antioxidants. Great for fresh juice, snacking, salads, or adding zest to desserts." 
+  },
+  { 
+    title: "Mangoes", 
+    description: "Sweet and tropical, the king of fruits.", 
+    image: "/images/mango.jpg", 
+    price: 20,
+    details: "Ripe, sweet mangoes with tropical flavor and rich aroma. Ideal for eating fresh, making smoothies, desserts, jams, and traditional recipes." 
+  },
+  { 
+    title: "Grapes", 
+    description: "Fresh clusters, ideal for snacking or juices.", 
+    image: "/images/grapes.jpg", 
+    price: 14,
+    details: "Juicy, sweet grapes perfect for snacking, desserts, and juices. Rich in vitamins, antioxidants, and natural sugars." 
+  },
+  { 
+    title: "Strawberries", 
+    description: "Bright red and juicy, perfect for desserts.", 
+    image: "/images/strawberry.jpg", 
+    price: 18,
+    details: "Fresh strawberries, bright red and bursting with flavor. Ideal for desserts, smoothies, jams, or snacking. Rich in vitamin C and antioxidants." 
+  },
+  { 
+    title: "Pineapples", 
+    description: "Tropical delight, tangy and sweet.", 
+    image: "/images/pineapple.jpg", 
+    price: 22,
+    details: "Juicy, tangy, and sweet pineapples. Excellent for snacking, smoothies, desserts, and tropical dishes. Contains bromelain, which aids digestion." 
+  },
+  { 
+    title: "Papaya", 
+    description: "Soft and sweet, excellent for digestion.", 
+    image: "/images/papaya.jpg", 
+    price: 16,
+    details: "Ripe papaya, soft, sweet, and highly digestible. Rich in vitamin C, fiber, and digestive enzymes. Perfect for snacking, smoothies, and salads." 
+  },
+  { 
+    title: "Watermelon", 
+    description: "Refreshing and hydrating summer fruit.", 
+    image: "/images/watermelon.jpg", 
+    price: 12,
+    details: "Hydrating and refreshing watermelon, naturally sweet and juicy. Ideal for summer snacks, juices, smoothies, and fruit salads." 
+  },
+  { 
+    title: "Pears", 
+    description: "Sweet and juicy, perfect for snacking.", 
+    image: "/images/pear.jpg", 
+    price: 14,
+    details: "Fresh pears, naturally sweet and juicy. Great for snacking, desserts, baking, or adding to salads. Rich in fiber and antioxidants." 
+  },
+  { 
+    title: "Cherries", 
+    description: "Small, sweet, and packed with antioxidants.", 
+    image: "/images/cherries.jpg", 
+    price: 25,
+    details: "Juicy cherries with a perfect balance of sweetness and tartness. Ideal for snacking, desserts, jams, or baking. Packed with antioxidants and vitamins." 
+  },
+  { 
+    title: "Kiwi", 
+    description: "Tangy, vitamin-rich, and full of flavor.", 
+    image: "/images/kiwi.jpg", 
+    price: 20,
+    details: "Fresh kiwis with tangy and sweet flavor, high in vitamin C and fiber. Perfect for fruit salads, smoothies, or eating fresh." 
+  },
+  { 
+    title: "Pomegranates", 
+    description: "Juicy seeds, loaded with antioxidants.", 
+    image: "/images/pomegranate.jpg", 
+    price: 18,
+    details: "Fresh pomegranates with juicy seeds, rich in antioxidants, vitamins, and minerals. Ideal for snacking, juices, desserts, or garnishing dishes." 
+  },
+  { 
+    title: "Dragon Fruit", 
+    description: "Exotic, mildly sweet, and visually stunning.", 
+    image: "/images/dragon-fruit.jpg", 
+    price: 30,
+    details: "Exotic dragon fruit with a mildly sweet flavor and striking appearance. Great for smoothies, fruit bowls, salads, and garnishes. High in fiber and vitamin C." 
+  },
+  { 
+    title: "Lychee", 
+    description: "Sweet and aromatic, perfect for desserts and drinks.", 
+    image: "/images/lychee.jpg", 
+    price: 28,
+    details: "Ripe lychees, sweet and fragrant. Perfect for snacking, desserts, cocktails, and smoothies. Rich in vitamin C and antioxidants." 
+  },
+  { 
+    title: "Guava", 
+    description: "Rich in Vitamin C, slightly tangy and sweet.", 
+    image: "/images/guava.jpg", 
+    price: 18,
+    details: "Fresh guava, slightly tangy and naturally sweet. High in vitamin C, fiber, and antioxidants. Ideal for snacking, juices, and desserts." 
+  },
+  { 
+    title: "Apricots", 
+    description: "Sweet and soft, perfect for snacking or jams.", 
+    image: "/images/apricots.jpg", 
+    price: 22,
+    details: "Fresh apricots, soft, juicy, and sweet. Perfect for snacking, jams, baking, or desserts. Rich in vitamins A and C." 
+  },
+  { 
+    title: "Plums", 
+    description: "Juicy and sweet with a slight tartness.", 
+    image: "/images/plums.jpg", 
+    price: 20,
+    details: "Ripe plums with a balance of sweetness and mild tartness. Ideal for snacking, desserts, jams, and baking. Rich in vitamins and antioxidants." 
+  },
 ];
 
 export default function FruitsPage() {
@@ -144,7 +252,7 @@ export default function FruitsPage() {
               className="w-full h-48 sm:h-64 md:h-72 object-cover rounded-lg mb-4"
             />
             <h3 className="text-xl sm:text-2xl font-bold text-red-800 mb-2">{selectedFruit.title}</h3>
-            <p className="text-gray-700 mb-3 text-sm sm:text-base">{selectedFruit.description}</p>
+             <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedFruit.details}</p>
             <span className="block text-lg sm:text-xl text-red-700 font-semibold mb-4">${selectedFruit.price}</span>
 
             <div className="flex flex-col sm:flex-row gap-2 w-full">
