@@ -54,7 +54,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ---------------- VegetablesPage Component ----------------
+// ---------------- Vegetables Data ----------------
 const vegetablesData: CartItem[] = [
   { 
     title: "Fresh Tomatoes", 
@@ -205,15 +205,32 @@ const vegetablesData: CartItem[] = [
   },
 ];
 
-
+// ---------------- VegetablesPage Component ----------------
 export default function VegetablesPage() {
   const { addToCart } = useCart();
   const [selectedVeg, setSelectedVeg] = useState<CartItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter vegetables based on search query
+  const filteredVegetables = vegetablesData.filter((veg) =>
+    veg.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
       <Navbar />
       <Hero />
+
+      {/* Search Bar */}
+      <div className="flex justify-center mt-8 mb-6 px-4 sm:px-6 lg:px-12">
+        <input
+          type="text"
+          placeholder="Search vegetables..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+        />
+      </div>
 
       {/* Vegetable Collection Section */}
       <section className="px-4 sm:px-6 lg:px-12 py-12 bg-green-50">
@@ -222,7 +239,7 @@ export default function VegetablesPage() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {vegetablesData.map((veg, index) => (
+          {filteredVegetables.map((veg, index) => (
             <TiltCard key={index}>
               <div
                 className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full cursor-pointer"
@@ -282,7 +299,7 @@ export default function VegetablesPage() {
             </div>
 
             <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedVeg.title}</h3>
-             <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedVeg.details}</p>
+            <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedVeg.details}</p>
             <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedVeg.price}</span>
 
             <div className="flex flex-col sm:flex-row gap-2 w-full">

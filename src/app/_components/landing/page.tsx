@@ -58,94 +58,99 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 export default function HomePage() {
   const { addToCart } = useCart();
   const [selectedProduct, setSelectedProduct] = useState<CartItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const products: CartItem[] = [
-  { 
-    title: "Organic Wheat", 
-    price: 30, 
-    image: "/images/wheat.jpg", 
-    description: "High-quality grains from farms.",
-    details: "Organic wheat sourced from certified local farms. Rich in fiber, vitamins, and minerals, ideal for baking bread, making pasta, or everyday cooking. Carefully cleaned and packed to retain freshness and nutrients." 
-  },
-  { 
-    title: "Fresh Tomatoes", 
-    price: 12, 
-    image: "/images/tomato.jpg", 
-    description: "Juicy and ripe tomatoes.",
-    details: "Farm-fresh, hand-picked tomatoes. Packed with antioxidants like lycopene, perfect for salads, sauces, soups, and cooking. Their natural sweetness enhances flavor without added preservatives." 
-  },
-  { 
-    title: "Seasonal Fruits", 
-    price: 20, 
-    image: "/images/fruits.png", 
-    description: "Fresh seasonal fruits.",
-    details: "A curated mix of the freshest seasonal fruits sourced from local orchards. Nutritious, flavorful, and ideal for snacking, desserts, smoothies, and fruit salads. Each batch is selected for ripeness and quality." 
-  },
-  { 
-    title: "Rice", 
-    price: 12, 
-    image: "/images/rice.jpg", 
-    description: "Premium rice grains.",
-    details: "High-quality, long-grain rice with a soft texture and natural aroma. Perfect for daily meals, pilafs, and special recipes. Rinsed and packaged to preserve freshness and prevent clumping." 
-  },
-  { 
-    title: "Fresh Onions", 
-    price: 12, 
-    image: "/images/onion.jpg", 
-    description: "Organic onions from farms.",
-    details: "Crisp and pungent organic onions, rich in vitamins and antioxidants. Ideal for cooking, garnishing, and enhancing flavors in soups, curries, and salads. Naturally grown without synthetic fertilizers." 
-  },
-  { 
-    title: "Fresh Vegetables", 
-    price: 12, 
-    image: "/images/veg.jpg", 
-    description: "Mixed farm-fresh vegetables.",
-    details: "A mix of seasonal vegetables, hand-picked for freshness and nutritional value. Great for stir-fries, salads, soups, and everyday cooking. Packed carefully to maintain crunchiness and flavor." 
-  },
-  { 
-    title: "Bell Peppers", 
-    description: "Colorful and crisp.", 
-    image: "/images/peppers.jpg", 
-    price: 11,
-    details: "Sweet and crunchy bell peppers in red, yellow, and green varieties. Excellent for salads, sandwiches, stir-fries, and grilling. Rich in vitamin C and antioxidants for a healthy diet." 
-  },
-  { 
-    title: "Cauliflower", 
-    description: "Fresh florets ideal for roasting.", 
-    image: "/images/cauliflower.jpg", 
-    price: 13,
-    details: "Fresh cauliflower florets, perfect for roasting, steaming, soups, and curries. Naturally low in calories, high in fiber and vitamins, and sourced from trusted local farms." 
-  },
-  { 
-    title: "Grapes", 
-    description: "Fresh clusters, ideal for snacking or juices.", 
-    image: "/images/grapes.jpg", 
-    price: 14,
-    details: "Sweet, juicy grapes carefully harvested for optimal taste. Perfect for snacking, desserts, salads, or juicing. Naturally rich in antioxidants and vitamins." 
-  },
-  { 
-    title: "Strawberries", 
-    description: "Bright red and juicy, perfect for desserts.", 
-    image: "/images/strawberry.jpg", 
-    price: 18,
-    details: "Ripe, succulent strawberries with natural sweetness. Ideal for smoothies, desserts, jams, and snacking. Handpicked to ensure freshness and flavor." 
-  },
-  { 
-    title: "Basmati Rice", 
-    description: "Aromatic long-grain rice", 
-    image: "/images/rice.jpg", 
-    price: 25,
-    details: "Premium Basmati rice with a delicate aroma and fluffy texture. Perfect for biryanis, pilafs, and special dishes. Naturally aged for optimal fragrance and long-grain quality." 
-  },
-  { 
-    title: "Mangoes", 
-    description: "Sweet and tropical, the king of fruits.", 
-    image: "/images/mango.jpg", 
-    price: 20,
-    details: "Ripe, juicy mangoes known for their rich sweetness and tropical flavor. Ideal for eating fresh, making smoothies, desserts, or traditional recipes. Sourced from trusted orchards for quality and taste." 
-  },
-];
+    { 
+      title: "Organic Wheat", 
+      price: 30, 
+      image: "/images/wheat.jpg", 
+      description: "High-quality grains from farms.",
+      details: "Organic wheat sourced from certified local farms. Rich in fiber, vitamins, and minerals, ideal for baking bread, making pasta, or everyday cooking. Carefully cleaned and packed to retain freshness and nutrients." 
+    },
+    { 
+      title: "Fresh Tomatoes", 
+      price: 12, 
+      image: "/images/tomato.jpg", 
+      description: "Juicy and ripe tomatoes.",
+      details: "Farm-fresh, hand-picked tomatoes. Packed with antioxidants like lycopene, perfect for salads, sauces, soups, and cooking. Their natural sweetness enhances flavor without added preservatives." 
+    },
+    { 
+      title: "Seasonal Fruits", 
+      price: 20, 
+      image: "/images/fruits.png", 
+      description: "Fresh seasonal fruits.",
+      details: "A curated mix of the freshest seasonal fruits sourced from local orchards. Nutritious, flavorful, and ideal for snacking, desserts, smoothies, and fruit salads. Each batch is selected for ripeness and quality." 
+    },
+    { 
+      title: "Rice", 
+      price: 12, 
+      image: "/images/rice.jpg", 
+      description: "Premium rice grains.",
+      details: "High-quality, long-grain rice with a soft texture and natural aroma. Perfect for daily meals, pilafs, and special recipes. Rinsed and packaged to preserve freshness and prevent clumping." 
+    },
+    { 
+      title: "Fresh Onions", 
+      price: 12, 
+      image: "/images/onion.jpg", 
+      description: "Organic onions from farms.",
+      details: "Crisp and pungent organic onions, rich in vitamins and antioxidants. Ideal for cooking, garnishing, and enhancing flavors in soups, curries, and salads. Naturally grown without synthetic fertilizers." 
+    },
+    { 
+      title: "Fresh Vegetables", 
+      price: 12, 
+      image: "/images/veg.jpg", 
+      description: "Mixed farm-fresh vegetables.",
+      details: "A mix of seasonal vegetables, hand-picked for freshness and nutritional value. Great for stir-fries, salads, soups, and everyday cooking. Packed carefully to maintain crunchiness and flavor." 
+    },
+    { 
+      title: "Bell Peppers", 
+      description: "Colorful and crisp.", 
+      image: "/images/peppers.jpg", 
+      price: 11,
+      details: "Sweet and crunchy bell peppers in red, yellow, and green varieties. Excellent for salads, sandwiches, stir-fries, and grilling. Rich in vitamin C and antioxidants for a healthy diet." 
+    },
+    { 
+      title: "Cauliflower", 
+      description: "Fresh florets ideal for roasting.", 
+      image: "/images/cauliflower.jpg", 
+      price: 13,
+      details: "Fresh cauliflower florets, perfect for roasting, steaming, soups, and curries. Naturally low in calories, high in fiber and vitamins, and sourced from trusted local farms." 
+    },
+    { 
+      title: "Grapes", 
+      description: "Fresh clusters, ideal for snacking or juices.", 
+      image: "/images/grapes.jpg", 
+      price: 14,
+      details: "Sweet, juicy grapes carefully harvested for optimal taste. Perfect for snacking, desserts, salads, or juicing. Naturally rich in antioxidants and vitamins." 
+    },
+    { 
+      title: "Strawberries", 
+      description: "Bright red and juicy, perfect for desserts.", 
+      image: "/images/strawberry.jpg", 
+      price: 18,
+      details: "Ripe, succulent strawberries with natural sweetness. Ideal for smoothies, desserts, jams, and snacking. Handpicked to ensure freshness and flavor." 
+    },
+    { 
+      title: "Basmati Rice", 
+      description: "Aromatic long-grain rice", 
+      image: "/images/rice.jpg", 
+      price: 25,
+      details: "Premium Basmati rice with a delicate aroma and fluffy texture. Perfect for biryanis, pilafs, and special dishes. Naturally aged for optimal fragrance and long-grain quality." 
+    },
+    { 
+      title: "Mangoes", 
+      description: "Sweet and tropical, the king of fruits.", 
+      image: "/images/mango.jpg", 
+      price: 20,
+      details: "Ripe, juicy mangoes known for their rich sweetness and tropical flavor. Ideal for eating fresh, making smoothies, desserts, or traditional recipes. Sourced from trusted orchards for quality and taste." 
+    },
+  ];
 
+  // Filter products based on search query
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
@@ -179,11 +184,22 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Search Bar */}
+      <div className="flex justify-center mt-8 mb-6">
+        <input
+          type="text"
+          placeholder="Search for products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+        />
+      </div>
+
       {/* Featured Products Section */}
       <section id="featured" className="px-4 sm:px-6 lg:px-12 py-12 bg-green-50">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-green-900 tracking-wide">Farm Fresh Now</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <TiltCard key={index}>
               <div className="bg-white rounded-lg shadow-2xl overflow-hidden cursor-pointer flex flex-col h-full">
                 <img
@@ -222,41 +238,39 @@ export default function HomePage() {
 
       {/* Product Popup Modal */}
       {selectedProduct && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 sm:p-6 md:p-12">
-                <div className="bg-white rounded-xl shadow-2xl max-w-md sm:max-w-lg w-full p-4 sm:p-6 md:p-8 relative transition-transform duration-500 scale-95">
-                  <button
-                    className="absolute top-3 right-3 text-gray-600 hover:text-red-500 text-2xl"
-                    onClick={() => setSelectedProduct(null)}
-                  >
-                    &times;
-                  </button>
-                    <img
-                      src={selectedProduct.image}
-                      alt={selectedProduct.title}
-                      className="object-cover rounded-lg"
-                    />
-      
-                  <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedProduct.title}</h3>
-                   <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedProduct.details}</p>
-                  <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedProduct.price}</span>
-      
-                  <div className="flex flex-col sm:flex-row gap-2 w-full">
-                    <button
-                      className="flex-1 bg-green-600 hover:bg-green-500 text-white py-2 rounded-md"
-                      onClick={() => alert(`Buy Now clicked for ${selectedProduct.title}`)}
-                    >
-                      Buy Now
-                    </button>
-                    <button
-                      className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white py-2 rounded-md"
-                      onClick={() => { addToCart(selectedProduct); alert(`✅ ${selectedProduct.title} added to cart`); }}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 sm:p-6 md:p-12">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md sm:max-w-lg w-full p-4 sm:p-6 md:p-8 relative transition-transform duration-500 scale-95">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-red-500 text-2xl"
+              onClick={() => setSelectedProduct(null)}
+            >
+              &times;
+            </button>
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.title}
+              className="object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedProduct.title}</h3>
+            <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedProduct.details}</p>
+            <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedProduct.price}</span>
+            <div className="flex flex-col sm:flex-row gap-2 w-full">
+              <button
+                className="flex-1 bg-green-600 hover:bg-green-500 text-white py-2 rounded-md"
+                onClick={() => alert(`Buy Now clicked for ${selectedProduct.title}`)}
+              >
+                Buy Now
+              </button>
+              <button
+                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-white py-2 rounded-md"
+                onClick={() => { addToCart(selectedProduct); alert(`✅ ${selectedProduct.title} added to cart`); }}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <AboutUs />
       <Footer />

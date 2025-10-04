@@ -53,7 +53,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ---------------- FruitsPage Component ----------------
+// ---------------- Fruits Data ----------------
 const fruitsData: CartItem[] = [
   { 
     title: "Red Apples", 
@@ -183,14 +183,32 @@ const fruitsData: CartItem[] = [
   },
 ];
 
+// ---------------- FruitsPage Component ----------------
 export default function FruitsPage() {
   const { addToCart } = useCart();
   const [selectedFruit, setSelectedFruit] = useState<CartItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter fruits based on search query
+  const filteredFruits = fruitsData.filter((fruit) =>
+    fruit.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <main className="min-h-screen bg-white font-sans scroll-smooth">
       <Navbar />
       <Hero />
+
+      {/* Search Bar */}
+      <div className="flex justify-center mt-8 mb-6 px-4 sm:px-6 lg:px-12">
+        <input
+          type="text"
+          placeholder="Search fruits..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+        />
+      </div>
 
       {/* Fruit Collection Section */}
       <section className="px-4 sm:px-6 lg:px-12 py-12 bg-red-50">
@@ -199,7 +217,7 @@ export default function FruitsPage() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {fruitsData.map((fruit, index) => (
+          {filteredFruits.map((fruit, index) => (
             <TiltCard key={index}>
               <div
                 className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full cursor-pointer"
@@ -251,9 +269,9 @@ export default function FruitsPage() {
               alt={selectedFruit.title}
               className="w-full h-48 sm:h-64 md:h-72 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl sm:text-2xl font-bold text-red-800 mb-2">{selectedFruit.title}</h3>
-             <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedFruit.details}</p>
-            <span className="block text-lg sm:text-xl text-red-700 font-semibold mb-4">${selectedFruit.price}</span>
+            <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">{selectedFruit.title}</h3>
+            <p className="text-gray-700 mb-1 text-sm sm:text-base">{selectedFruit.details}</p>
+            <span className="block text-lg sm:text-xl text-green-700 font-semibold mb-4">${selectedFruit.price}</span>
 
             <div className="flex flex-col sm:flex-row gap-2 w-full">
               <button
