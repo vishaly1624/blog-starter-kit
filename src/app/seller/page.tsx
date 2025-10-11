@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Product {
   id: number;
@@ -18,6 +19,7 @@ const productOptions = {
 };
 
 export default function SellerDashboard() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [formData, setFormData] = useState({
     category: "Crops" as keyof typeof productOptions,
@@ -26,12 +28,14 @@ export default function SellerDashboard() {
     stock: "",
   });
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // toggle for all devices
+
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const category = e.target.value as keyof typeof productOptions;
     setFormData({
       ...formData,
       category,
-      name: productOptions[category][0], // default first product
+      name: productOptions[category][0],
     });
   };
 
@@ -65,36 +69,86 @@ export default function SellerDashboard() {
     });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    alert("Logged out successfully ✅");
+    router.push("/login");
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-white shadow-md flex flex-col md:h-screen">
-        <div className="p-6 text-2xl font-bold text-green-700 border-b">Seller Panel</div>
-        <nav className="flex-1 p-4 space-y-2">
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Dashboard
+      <aside
+        className={`bg-white shadow-md transition-all duration-300 flex ${isSidebarOpen ? "flex-col" : "flex-row"
+          } md:flex-col ${isSidebarOpen ? "w-full md:w-64" : "w-16"} md:h-screen`}
+      >
+        <div className="flex justify-between items-center p-6 border-b">
+          {isSidebarOpen && <div className="text-2xl font-bold text-green-700">Seller Panel</div>}
+          <button
+            className="text-green-700 font-bold text-2xl"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
           </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Add Product
+        </div>
+        <nav
+          className={`flex-1 p-2 md:p-4 flex ${isSidebarOpen ? "flex-col space-y-2" : "flex-row space-x-2"
+            } md:flex-col md:space-y-2`}
+        >
+          <button
+            onClick={() => router.push("/")}
+            className={`block px-4 py-2 rounded-md hover:bg-blue-100 text-blue-600 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "Home" : "🏠"}
           </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            My Products
+          <button
+            className={`block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "Dashboard" : "📊"}
           </button>
-          <button className="block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left">
-            Orders
+          <button
+            className={`block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "Add Product" : "➕"}
+          </button>
+          <button
+            className={`block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "My Products" : "📦"}
+          </button>
+          <button
+            className={`block px-4 py-2 rounded-md hover:bg-green-100 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "Orders" : "🛒"}
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className={`block px-4 py-2 rounded-md hover:bg-red-100 text-red-600 w-full text-left ${!isSidebarOpen && "text-center px-0"
+              }`}
+          >
+            {isSidebarOpen ? "Logout" : "❌"}
           </button>
         </nav>
       </aside>
 
-      {/* Main content */}
+      {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 overflow-x-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, Seller!</h1>
 
         {/* Add Product Form */}
         <div className="bg-white shadow-md rounded-xl p-6 mb-8 w-full overflow-x-auto">
           <h2 className="text-2xl font-semibold mb-4">Add New Product</h2>
-          <form className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" onSubmit={handleAddProduct}>
-            {/* Category Dropdown */}
+          <form
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+            onSubmit={handleAddProduct}
+          >
             <select
               name="category"
               value={formData.category}
@@ -108,7 +162,6 @@ export default function SellerDashboard() {
               ))}
             </select>
 
-            {/* Product Name Dropdown */}
             <select
               name="name"
               value={formData.name}
@@ -122,7 +175,6 @@ export default function SellerDashboard() {
               ))}
             </select>
 
-            {/* Price Input */}
             <input
               type="number"
               name="price"
@@ -132,7 +184,6 @@ export default function SellerDashboard() {
               className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
             />
 
-            {/* Stock Input with kg */}
             <div className="relative">
               <input
                 type="number"

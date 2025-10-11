@@ -17,31 +17,42 @@ export default function AuthPage() {
     setRole(newRole);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isLogin) {
-      if (formData.email && formData.password) {
-        alert(`${role.charAt(0).toUpperCase() + role.slice(1)} login successful ✅`);
+    const endpoint = isLogin
+      ? "http://localhost:5000/api/auth/login"
+      : "http://localhost:5000/api/auth/register";
 
-        // Redirect based on role
-        if (role === "customer") {
-          router.push("/"); // Customer goes to home page
-        } else {
-          router.push("/seller"); // Seller goes to dashboard
-        }
-      } else {
-        alert("Please enter email & password");
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, role }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Something went wrong");
+        return;
       }
-    } else {
-      if (formData.name && formData.email && formData.password) {
-        alert(`${role.charAt(0).toUpperCase() + role.slice(1)} registration successful ✅ Now you can login`);
+
+      if (isLogin) {
+        alert("Login successful ✅");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", role); // ✅ Added this line
+        router.push(role === "customer" ? "/" : "/seller");
+      } else {
+        alert("Registration successful ✅ Now you can login");
         setIsLogin(true);
-      } else {
-        alert("Please fill all fields");
       }
+    } catch (err) {
+      console.error(err);
+      alert("Server error, please try again later");
     }
   };
+
 
   return (
     <div
@@ -58,17 +69,15 @@ export default function AuthPage() {
         <div className="flex justify-center gap-4 mb-4">
           <button
             onClick={() => handleRoleChange("customer")}
-            className={`px-4 py-2 rounded-md font-medium transition ${
-              role === "customer" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-md font-medium transition ${role === "customer" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
+              }`}
           >
             Customer
           </button>
           <button
             onClick={() => handleRoleChange("seller")}
-            className={`px-4 py-2 rounded-md font-medium transition ${
-              role === "seller" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-md font-medium transition ${role === "seller" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
+              }`}
           >
             Seller
           </button>
